@@ -1,1 +1,34 @@
-<p>adiciona-contatos works!</p>
+<section class="contato-form">
+	<h2>Cadastro de Contato</h2>
+
+	<form [formGroup]="contatoForm" (ngSubmit)="adicionarContato()">
+		<div>
+			<label>Nome</label>
+			<input formControlName="nome" />
+		</div>
+
+		<div>
+			<label>Telefone</label>
+			<input formControlName="telefone" />
+		</div>
+
+		<div>
+			<label>Email</label>
+			<input formControlName="email" />
+		</div>
+
+		<div>
+			<label>Aniversário</label>
+			<input type="date" formControlName="aniversario" />
+		</div>
+
+		<div>
+			<label>Tipo</label>
+			<select formControlName="tipo">
+				<option *ngFor="let t of tipos" [value]="t">{{ t }}</option>
+			</select>
+		</div>
+
+		<button type="submit">Adicionar</button>
+	</form>
+</section>

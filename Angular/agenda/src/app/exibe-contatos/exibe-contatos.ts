@@ -1,18 +1,27 @@
 import { Component, inject } from '@angular/core';
+import { CommonModule } from '@angular/common';
 import { AgendaService } from '../model/agenda-service';
 import { Contato } from '../model/contato';
 
 @Component({
   selector: 'app-exibe-contatos',
-  imports: [],
+  standalone: true,
+  imports: [CommonModule],
   templateUrl: './exibe-contatos.html',
-  styleUrl: './exibe-contatos.scss',
+  styleUrls: ['./exibe-contatos.css'],
 })
 export class ExibeContatos {
-    #agendaService = inject(AgendaService)
-    protected readonly contatos: Contato[] = []
+  #agendaService = inject(AgendaService);
 
-    constructor() {
-      this.contatos = this.#agendaService.obterTodos()
-    }
+  protected get contatos(): Contato[] {
+    return this.#agendaService.obterTodos();
+  }
+
+  protected trackByEmail(_index: number, item: Contato) {
+    return item.email;
+  }
+
+  protected removerContato(c: Contato): void {
+    this.#agendaService.remover(c);
+  }
 }

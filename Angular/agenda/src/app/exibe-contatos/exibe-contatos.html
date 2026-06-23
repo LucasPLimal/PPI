@@ -1,7 +1,8 @@
-<div>
-<ul>
-    @for(cc of contatos; track cc.email) {
-        <li>{{cc.nome}} - {{cc.email}} - {{cc.tipo}}</li>
-    }
-</ul>
+<div class="lista-contatos">
+    <ul>
+        <li *ngFor="let cc of contatos; trackBy: trackByEmail">
+            {{ cc.nome }} - {{ cc.email }} - {{ cc.tipo }}
+            <button (click)="removerContato(cc)">Remover</button>
+        </li>
+    </ul>
 </div>
