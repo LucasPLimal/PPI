@@ -3,6 +3,7 @@
         <li *ngFor="let cc of contatos; trackBy: trackByEmail">
             {{ cc.nome }} - {{ cc.email }} - {{ cc.tipo }}
             <button (click)="removerContato(cc)">Remover</button>
+            <button (click)="favoritar(cc)">{{ cc.favorito ? 'Desfavoritar' : 'Favoritar' }}</button>
         </li>
     </ul>
 </div>

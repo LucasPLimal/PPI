@@ -35,4 +35,21 @@ export class AgendaService {
     return [...this.#contatos]
   }
 
+  favoritar(c: Contato): boolean {
+    if (!c) return false
+    const idx = this.#contatos.findIndex((ct) => ct.email === c.email)
+  
+    if (idx === -1) return false
+    this.#contatos[idx].favorito = true
+    return true
+  }
+
+  desfavoritar(c: Contato): boolean {
+    if (!c) return false
+    const idx = this.#contatos.findIndex((ct) => ct.email === c.email)
+
+    if (idx === -1) return false
+    this.#contatos[idx].favorito = false
+    return true
+  }
 }

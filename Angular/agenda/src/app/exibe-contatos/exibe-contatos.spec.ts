@@ -2,6 +2,7 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { ExibeContatos } from './exibe-contatos';
 
+
 describe('ExibeContatos', () => {
   let component: ExibeContatos;
   let fixture: ComponentFixture<ExibeContatos>;

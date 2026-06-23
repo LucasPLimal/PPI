@@ -1,4 +1,5 @@
 import { Component, inject } from '@angular/core';
+import { CommonModule } from '@angular/common';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { AgendaService } from '../model/agenda-service';
 import { Contato, TipoContato } from '../model/contato';
@@ -6,7 +7,7 @@ import { Contato, TipoContato } from '../model/contato';
 @Component({
   selector: 'app-adiciona-contato',
   standalone: true,
-  imports: [ReactiveFormsModule],
+  imports: [CommonModule, ReactiveFormsModule],
   templateUrl: './adiciona-contato.html',
   styleUrls: ['./adiciona-contato.css'],
 })
@@ -38,6 +39,7 @@ export class AdicionaContato {
       email: email as string,
       aniversario: new Date(aniversario as string),
       tipo: tipo as TipoContato,
+      favorito: false,
     };
 
     this.#agendaService.adicionar(contato);

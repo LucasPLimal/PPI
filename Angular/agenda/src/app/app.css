@@ -1,0 +1,32 @@
+app-adiciona-contato,
+app-exibe-contatos {
+	display: block;
+	max-width: 700px;
+	margin: 16px auto;
+	padding: 0 12px;
+	font-family: Arial, sans-serif;
+}
+
+::ng-deep .contato-form,
+::ng-deep .lista-contatos {
+	border: 1px solid #ddd;
+	padding: 12px;
+	margin-bottom: 12px;
+}
+
+::ng-deep form > div {
+	margin-bottom: 10px;
+}
+
+::ng-deep input,
+::ng-deep select,
+::ng-deep button {
+	padding: 6px;
+	font-size: 14px;
+}
+
+::ng-deep input,
+::ng-deep select {
+	width: 100%;
+	box-sizing: border-box;
+}
