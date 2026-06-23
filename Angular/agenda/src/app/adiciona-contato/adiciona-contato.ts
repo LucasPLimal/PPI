@@ -1,48 +1,36 @@
 import { Component, inject } from '@angular/core';
-import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
-import { Contato, ContatoTipo } from './contato';
+import { AgendaService } from '../model/agenda-service';
+import { Contato, TipoContato } from '../model/contato';
 
 @Component({
-  selector: 'app-adiciona-contato',
-  standalone: true,
-  imports: [ReactiveFormsModule],
+  selector: 'app-adiciona-contatos',
+  imports: [],
   templateUrl: './adiciona-contato.html',
-  styleUrls: ['./adiciona-contato.css'],
+  styleUrl: './adiciona-contato.css',
 })
-export class AdicionaContato {
-  private fb = inject(FormBuilder);
-  protected readonly tipos = Object.values(ContatoTipo);
-  protected readonly contatoForm = this.fb.group({
-    nome: ['', Validators.required],
-    telefone: ['', Validators.required],
-    email: ['', [Validators.required, Validators.email]],
-    aniversario: ['', Validators.required],
-    tipo: [ContatoTipo.Amigo, Validators.required],
-  });
-
-  protected contatos: Contato[] = [];
-
-  constructor() {}
-
-  protected adicionarContato(): void {
-    if (this.contatoForm.invalid) {
-      this.contatoForm.markAllAsTouched();
-      return;
+export class AdicionaContatos {
+  #agendaService = inject(AgendaService)
+  constructor() {
+    this.adicionarContato()
+  }
+  adicionarContato() {
+    let contato : Contato = {
+       nome: 'Bruno',
+       telefone: '849393928282',
+       email: 'bruno.gurgel@ifrn.edu.br',
+       aniversario: new Date (1982-1-16),
+       tipo: TipoContato.AMIGO
     }
 
-    const { nome, telefone, email, aniversario, tipo } = this.contatoForm.value;
+    let leonardo : Contato = {
+       nome: 'Leonardo',
+       telefone: '849393928282',
+       email: 'leonardo@ifrn.edu.br',
+       aniversario: new Date (1982-1-16),
+       tipo: TipoContato.IFRN
+    }
 
-    this.contatos.push(
-      new Contato(
-        nome as string,
-        telefone as string,
-        email as string,
-        aniversario as string,
-        tipo as ContatoTipo,
-      ),
-    );
-
-    this.contatoForm.reset({ tipo: ContatoTipo.Amigo });
+    this.#agendaService.adicionar(contato)
+    this.#agendaService.adicionar(leonardo)
   }
 }
-
