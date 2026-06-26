@@ -14,7 +14,7 @@ export class ExibeContatos {
   #agendaService = inject(AgendaService);
 
   protected get contatos(): Contato[] {
-    return this.#agendaService.obterTodos();
+    return this.#agendaService.obterVisiveis();
   }
 
   protected trackByEmail(_index: number, item: Contato) {

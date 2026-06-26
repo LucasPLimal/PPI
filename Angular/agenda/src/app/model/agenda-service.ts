@@ -6,6 +6,7 @@ import { Contato } from './contato';
 })
 export class AgendaService {
   #contatos: Contato[]
+  #filtrarFavoritos = false
 
   constructor() {
     this.#contatos = []
@@ -33,6 +34,22 @@ export class AgendaService {
 
   obterTodos(): Contato[] {
     return [...this.#contatos]
+  }
+
+  obterFavoritos(): Contato[] {
+    return this.obterTodos().filter((c) => c.favorito)
+  }
+
+  alternarFiltroFavoritos(): void {
+    this.#filtrarFavoritos = !this.#filtrarFavoritos
+  }
+
+  estaFiltrandoFavoritos(): boolean {
+    return this.#filtrarFavoritos
+  }
+
+  obterVisiveis(): Contato[] {
+    return this.#filtrarFavoritos ? this.obterFavoritos() : this.obterTodos()
   }
 
   favoritar(c: Contato): boolean {

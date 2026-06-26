@@ -1,5 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
+import { AgendaService } from '../model/agenda-service';
 import { FiltroContato } from './filtro-contato';
 
 describe('FiltroContato', () => {
@@ -18,5 +19,18 @@ describe('FiltroContato', () => {
 
   it('should create', () => {
     expect(component).toBeTruthy();
+  });
+
+  it('should toggle the favorite filter state', () => {
+    const agendaService = TestBed.inject(AgendaService);
+    const button: HTMLButtonElement = fixture.nativeElement.querySelector('button');
+
+    expect(button).toBeTruthy();
+    expect(agendaService.estaFiltrandoFavoritos()).toBeFalse();
+
+    button.click();
+    fixture.detectChanges();
+
+    expect(agendaService.estaFiltrandoFavoritos()).toBeTrue();
   });
 });

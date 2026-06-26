@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { AgendaService } from '../model/agenda-service';
 import { Contato, TipoContato } from '../model/contato';
+import { FiltroContato } from '../filtro-contato/filtro-contato';
 
 @Component({
   selector: 'app-adiciona-contato',
