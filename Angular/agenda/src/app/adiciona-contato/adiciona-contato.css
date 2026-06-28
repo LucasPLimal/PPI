@@ -7,6 +7,7 @@ form {
 h2 {
   text-align: center;
 }
+
 label {
   display: block;
   color: #000000;
@@ -25,16 +26,9 @@ select {
   transition: border-color 0.3s ease;
 }
 
-input:focus,
-select:focus {
-  outline: none;
-  border-color: #3498db;
-  box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.1);
-}
-
 button {
   width: 100%;
-  background-color: #27ae60;
+  background-color: #2cc71e;
   color: white;
   border: none;
   padding: 12px;
@@ -42,13 +36,4 @@ button {
   cursor: pointer;
   font-size: 14px;
   font-weight: 600;
-  transition: background-color 0.3s ease;
-}
-
-button:hover {
-  background-color: #229954;
-}
-
-button:active {
-  transform: scale(0.98);
 }
