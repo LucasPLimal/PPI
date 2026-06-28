@@ -3,7 +3,6 @@ import { CommonModule } from '@angular/common';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { AgendaService } from '../model/agenda-service';
 import { Contato, TipoContato } from '../model/contato';
-import { FiltroContato } from '../filtro-contato/filtro-contato';
 
 @Component({
   selector: 'app-adiciona-contato',
@@ -40,7 +39,6 @@ export class AdicionaContato {
       email: email as string,
       aniversario: new Date(aniversario as string),
       tipo: tipo as TipoContato,
-      favorito: false,
     };
 
     this.#agendaService.adicionar(contato);

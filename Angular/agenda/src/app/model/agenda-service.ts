@@ -1,12 +1,12 @@
 import { Injectable } from '@angular/core';
-import { Contato } from './contato';
+import { Contato, TipoContato } from './contato';
 
 @Injectable({
   providedIn: 'root',
 })
 export class AgendaService {
   #contatos: Contato[]
-  #filtrarFavoritos = false
+  #tipoFiltro: TipoContato | null = null
 
   constructor() {
     this.#contatos = []
@@ -36,37 +36,21 @@ export class AgendaService {
     return [...this.#contatos]
   }
 
-  obterFavoritos(): Contato[] {
-    return this.obterTodos().filter((c) => c.favorito)
+  definirFiltroTipo(tipo: TipoContato | null): void {
+    this.#tipoFiltro = tipo
   }
 
-  alternarFiltroFavoritos(): void {
-    this.#filtrarFavoritos = !this.#filtrarFavoritos
-  }
-
-  estaFiltrandoFavoritos(): boolean {
-    return this.#filtrarFavoritos
+  obterTipoFiltro(): TipoContato | null {
+    return this.#tipoFiltro
   }
 
   obterVisiveis(): Contato[] {
-    return this.#filtrarFavoritos ? this.obterFavoritos() : this.obterTodos()
-  }
+    let visiveis = this.obterTodos()
 
-  favoritar(c: Contato): boolean {
-    if (!c) return false
-    const idx = this.#contatos.findIndex((ct) => ct.email === c.email)
-  
-    if (idx === -1) return false
-    this.#contatos[idx].favorito = true
-    return true
-  }
+    if (this.#tipoFiltro) {
+      visiveis = visiveis.filter((c) => c.tipo === this.#tipoFiltro)
+    }
 
-  desfavoritar(c: Contato): boolean {
-    if (!c) return false
-    const idx = this.#contatos.findIndex((ct) => ct.email === c.email)
-
-    if (idx === -1) return false
-    this.#contatos[idx].favorito = false
-    return true
+    return visiveis
   }
 }

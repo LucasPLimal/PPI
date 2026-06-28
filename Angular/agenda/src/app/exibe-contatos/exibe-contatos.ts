@@ -24,12 +24,4 @@ export class ExibeContatos {
   protected removerContato(c: Contato): void {
     this.#agendaService.remover(c);
   }
-
-  protected favoritar(c: Contato): void {
-    if (c.favorito) {
-      this.#agendaService.desfavoritar(c);
-    } else {
-      this.#agendaService.favoritar(c);
-    }
-  }
 }

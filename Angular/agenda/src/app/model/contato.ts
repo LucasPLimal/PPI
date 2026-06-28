@@ -12,5 +12,4 @@ export type Contato = {
     email: string
     aniversario: Date
     tipo: TipoContato
-    favorito: boolean
 }

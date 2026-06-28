@@ -1,3 +1,11 @@
-<button type="button" (click)="alternarFiltro()">
-  {{ filtroAtivo ? 'Mostrar todos' : 'Mostrar favoritos' }}
+<p>Filtros:</p>
+
+<button type="button" (click)="selecionarTipo(null)" [disabled]="tipoSelecionado === null">
+  Todos
 </button>
+
+@for ( tipo of tiposContato ; track tipo) {
+  <button type="button" (click)="selecionarTipo(tipo)" [disabled]="tipoSelecionado === tipo">
+    {{ tipo }}
+  </button>
+}

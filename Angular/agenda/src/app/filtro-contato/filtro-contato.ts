@@ -1,6 +1,7 @@
 import { Component, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { AgendaService } from '../model/agenda-service';
+import { TipoContato } from '../model/contato';
 
 @Component({
   selector: 'app-filtro-contato',
@@ -11,12 +12,13 @@ import { AgendaService } from '../model/agenda-service';
 })
 export class FiltroContato {
   #agendaService = inject(AgendaService);
+  protected readonly tiposContato = Object.values(TipoContato);
 
-  protected get filtroAtivo(): boolean {
-    return this.#agendaService.estaFiltrandoFavoritos();
+  protected get tipoSelecionado(): TipoContato | null {
+    return this.#agendaService.obterTipoFiltro();
   }
 
-  protected alternarFiltro(): void {
-    this.#agendaService.alternarFiltroFavoritos();
+  protected selecionarTipo(tipo: TipoContato | null): void {
+    this.#agendaService.definirFiltroTipo(tipo);
   }
 }
