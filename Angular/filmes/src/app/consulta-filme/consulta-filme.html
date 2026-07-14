@@ -1,0 +1,29 @@
+<section class="busca-filmes">
+  <form (submit)="$event.preventDefault(); buscarFilmes(busca())">
+    <label for="titulo">Digite o título do filme:</label>
+
+    <input
+      id="titulo"
+      type="text"
+      [value]="busca()"
+      (input)="atualizarBusca($event)"
+    />
+
+    <button type="submit">Buscar</button>
+  </form>
+
+  @if (filmes().length > 0) {
+    <div class="lista-filmes">
+      @for (filme of filmes(); track filme.imdbID) {
+        <ul class="cartao-filme">
+          <img [src]="filme.Poster" [alt]="filme.Title" />
+
+          <li><h2>{{ filme.Title }}</h2></li>
+          <li><p>Ano: {{ filme.Year }}</p></li>
+          <li><p>Tipo: {{ filme.Type }}</p></li>
+          <br><br>
+        </ul>
+      }
+    </div>
+  }
+</section>
