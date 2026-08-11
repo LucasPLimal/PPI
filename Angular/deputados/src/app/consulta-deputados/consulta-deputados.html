@@ -1,5 +1,15 @@
-<h1>Deputados</h1>
-@for(dep of deputados();  track dep.id) {
-    <p>{{dep.nome}}</p>
-    <p><img [src]="dep.urlFoto"></p>
-}
+<h1 class="titulo">Consulta de Deputados</h1>
+
+Filtrar por nome:<input type="text" #nomeInput (input)="filtrar(nomeInput.value)" />
+
+
+<div class="deputados">
+  @for (dep of deputados(); track dep.id) {
+    <div class="card-deputado">
+      <h2>{{ dep.nome }}</h2>
+      <img [src]="dep.urlFoto" [alt]="dep.nome" />
+      <p>Partido: {{ dep.siglaPartido }}</p>
+      <p>UF: {{ dep.siglaUf }}</p>
+    </div>
+  }
+</div>

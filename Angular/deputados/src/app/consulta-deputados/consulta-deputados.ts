@@ -8,7 +8,7 @@ import { Deputado } from '../Deputado';
   selector: 'app-consulta-deputados',
   imports: [],
   templateUrl: './consulta-deputados.html',
-  styleUrl: './consulta-deputados.css',
+  styleUrls: ['./consulta-deputados.css'],
 })
 export class ConsultaDeputados {
   readonly #deputadoService = inject(DeputadoService);
@@ -17,6 +17,13 @@ export class ConsultaDeputados {
 
   constructor() {
     this.#deputadoService.obterTodos().subscribe((res) => {
+      this.deputados.set(res.dados);
+    });
+    // inicializa com lista de todos
+  }
+
+  filtrar(nome: string) {
+    this.#deputadoService.obterPorNome(nome).subscribe((res) => {
       this.deputados.set(res.dados);
     });
   }
