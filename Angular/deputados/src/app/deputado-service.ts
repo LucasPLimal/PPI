@@ -15,4 +15,12 @@ export class DeputadoService {
     obterPorNome(nome: string): Observable<DeputadoResponse> {
         return this.#http.get<DeputadoResponse>(`${this.API}/deputados?ordem=ASC&ordenarPor=nome&nome=${nome}`);
     }
+
+    obterPorPartido(siglaPartido: string): Observable<DeputadoResponse> {
+        return this.#http.get<DeputadoResponse>(`${this.API}/deputados?ordem=ASC&ordenarPor=nome&siglaPartido=${siglaPartido}`);
+    }
+
+    obterPorUf(siglaUf: string): Observable<DeputadoResponse> {
+        return this.#http.get<DeputadoResponse>(`${this.API}/deputados?ordem=ASC&ordenarPor=nome&siglaUf=${siglaUf}`);
+    }
 }

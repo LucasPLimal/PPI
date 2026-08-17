@@ -1,6 +1,24 @@
 <h1 class="titulo">Consulta de Deputados</h1>
 
-Filtrar por nome:<input type="text" #nomeInput (input)="filtrar(nomeInput.value)" />
+<form [formGroup]="form" (submit)="filtrar()" class="filtro-form">
+  <label for="tipo">Tipo:</label>
+  <select id="tipo" formControlName="tipo">
+    <option value="nome">Nome</option>
+    <option value="partido">Partido (sigla)</option>
+    <option value="uf">UF</option>
+  </select>
+
+  <br><br>
+  <label for="nome"></label>
+  <input id="nome" type="text" formControlName="nome" />
+  <button type="submit" [disabled]="form.invalid">Buscar</button>
+
+  <div class="error" [hidden]="!(form.controls.nome.invalid && (form.controls.nome.dirty || form.controls.nome.touched))">
+    <small *ngIf="form.controls.nome.errors?.required">Campo obrigatório.</small>
+    <small *ngIf="form.controls.nome.errors?.minlength">Mínimo 2 caracteres.</small>
+    <small *ngIf="form.controls.nome.errors?.pattern">UF deve ter duas letras.</small>
+  </div>
+</form>
 
 
 <div class="deputados">
