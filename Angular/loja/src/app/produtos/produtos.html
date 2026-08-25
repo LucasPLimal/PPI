@@ -1,0 +1,12 @@
+<div class="produto-lista">
+  @for (prod of produtos; track prod.id) {
+    <div class="card-produto">
+      <h2>{{ prod.nome }}</h2>
+      <img [src]="prod.foto" [alt]="prod.nome" />
+      <p>Marca: {{ prod.marca }}</p>
+      <p>Descrição: {{ prod.descricao }}</p>
+      <p>Preço: {{ prod.preco }}</p>
+      <p>Quantidade: {{ prod.quantidade }}</p>
+    </div>
+  }
+</div>
