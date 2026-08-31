@@ -1,0 +1,22 @@
+<div class="produto-detalhe" *ngIf="produto">
+  <div class="produto-imagem-box">
+    <img [src]="produto.foto" [alt]="produto.nome" class="produto-imagem" />
+  </div>
+
+  <div class="produto-info">
+    <p class="marca">{{ produto.marca }}</p>
+    <h1>{{ produto.nome }}</h1>
+    <p class="descricao">{{ produto.descricao }}</p>
+
+    <div class="preco-box">
+      <span class="preco">R$ {{ produto.preco.toLocaleString('pt-BR', { minimumFractionDigits: 2 }) }}</span>
+      <span class="estoque">{{ produto.quantidade }} em estoque</span>
+    </div>
+
+    <button class="btn-comprar">Comprar agora</button>
+  </div>
+</div>
+
+<div *ngIf="!produto" class="carregando">
+  <p>Carregando produto...</p>
+</div>

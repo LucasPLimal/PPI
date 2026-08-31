@@ -1,6 +1,7 @@
-import { Component } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { Loja } from '../loja';
+import { LojaService } from '../loja-service';
+import { Produto } from '../produto';
 
 @Component({
   imports: [CommonModule],
@@ -8,16 +9,18 @@ import { Loja } from '../loja';
   styleUrl: './produtos.css',
   templateUrl: './produtos.html',
 })
-export class Produtos {
-  produtos: any[] = [];
+export class Produtos implements OnInit {
+  produtos: Produto[] = [];
+  readonly #lojaService = inject(LojaService);
 
-  constructor(private loja: Loja) {
-    this.buscarProdutos();
-  }
-
-  buscarProdutos() {
-    this.loja.getProdutos().subscribe({
-      next: (res) => (this.produtos = res),
+  ngOnInit(): void {
+    this.#lojaService.getProdutos().subscribe({
+      next: (dados) => {
+        this.produtos = dados;
+      },
+      error: (erro) => {
+        console.error('Erro ao buscar produtos:', erro);
+      }
     });
   }
 }
