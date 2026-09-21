@@ -1,18 +1,29 @@
-<div class="produtos-container">
-  <h1>Nossos Produtos</h1>
-  
-  <div class="produtos-grid">
-    <div *ngFor="let produto of produtos" class="produto-card">
-      <img [src]="produto.foto" [alt]="produto.nome" class="produto-imagem">
-      <div class="produto-info">
-        <h3>{{ produto.nome }}</h3>
-        <p class="marca">{{ produto.marca }}</p>
-        <p class="descricao">{{ produto.descricao }}</p>
-        <div class="produto-footer">
-          <span class="preco">R$ {{ produto.preco.toLocaleString('pt-BR', { minimumFractionDigits: 2 }) }}</span>
-          <span class="quantidade">{{ produto.quantidade }} em estoque</span>
-        </div>
-      </div>
-    </div>
-  </div>
+<div class="produtos-root">
+    @if (loading()) {
+	<div class="loading">Carregando produtos...</div>
+    }
+
+    @if (error()) {
+		<div class="error-box">
+			<p class="error-msg">{{ error() }}</p>
+			<button (click)="loadProdutos()">Tentar novamente</button>
+		</div>
+	}
+
+    @if (!loading() && !error()) {
+	<div class="grid">
+		
+        @for (p of produtos(); track p.id) {
+        <div class="card">
+			<img [src]="p.foto" [alt]="p.nome" />
+			<h3>{{ p.nome }}</h3>
+			<p class="marca">{{ p.marca }}</p>
+			<p class="desc">{{ p.descricao }}</p>
+			<p class="price">R$ {{ p.preco | number:'1.2-2' }}</p>
+			<a [routerLink]="['/produtos', p.id]" class="detalhe">Ver detalhes</a>
+        </div> 
+        }
+		
+	</div> 
+    }
 </div>
