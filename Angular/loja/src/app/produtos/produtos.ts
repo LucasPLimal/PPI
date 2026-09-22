@@ -3,9 +3,10 @@ import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { LojaService } from '../loja-service';
 import { Produto } from '../produto';
+import { Carrinho } from '../carrinho/carrinho';
 
 @Component({
-	imports: [CommonModule, RouterModule],
+	imports: [CommonModule, RouterModule, Carrinho],
 	selector: 'app-produtos',
 	styleUrl: './produtos.css',
 	templateUrl: './produtos.html',

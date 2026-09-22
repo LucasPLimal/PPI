@@ -1,6 +1,18 @@
- @if(produto()) {   
-    <p>Nome:  {{produto()?.nome}}</p>
-    <p>Preço: {{produto()?.preco}}</p>
- } @else {
+@if (produto()) {
+    <div class="produto-detalhe">
+        <img [src]="produto()?.foto" [alt]="produto()?.nome">
+
+        <div class="info">
+            <p class="marca">{{ produto()?.marca }}</p>
+            <h2>{{ produto()?.nome }}</h2>
+            <p class="descricao">{{ produto()?.descricao }}</p>
+            <p class="preco">R$ {{ produto()?.preco | number:'1.2-2' }}</p>
+
+            <button type="button" (click)="adicionarAoCarrinho()">
+                Adicionar ao carrinho
+            </button>
+        </div>
+    </div>
+} @else {
     <p>Produto não encontrado!</p>
- } 
+} 

@@ -10,6 +10,10 @@ export class CarrinhoService {
         this._itens().reduce((sum, item) => sum + item.produto.preco * item.quantidade, 0)
     );
 
+    readonly quantidadeTotal = computed(() =>
+        this._itens().reduce((sum, item) => sum + item.quantidade, 0)
+    );
+
     adicionarItem(newItem: Item) {
         if (!newItem) return;
         this._itens.update(items => {
@@ -42,5 +46,9 @@ export class CarrinhoService {
 
     obterTotal(): number {
         return this.total();
+    }
+
+    obterQuantidadeTotal(): number {
+        return this.quantidadeTotal();
     }
 }

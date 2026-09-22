@@ -1,29 +1,36 @@
 <div class="produtos-root">
+    <div class="topbar">
+        <h2>Catálogo</h2>
+        <app-carrinho></app-carrinho>
+    </div>
+
     @if (loading()) {
-	<div class="loading">Carregando produtos...</div>
+        <div class="loading">Carregando produtos...</div>
     }
 
     @if (error()) {
-		<div class="error-box">
-			<p class="error-msg">{{ error() }}</p>
-			<button (click)="loadProdutos()">Tentar novamente</button>
-		</div>
-	}
+        <div class="error-box">
+            <p class="error-msg">{{ error() }}</p>
+            <button (click)="loadProdutos()">Tentar novamente</button>
+        </div>
+    }
 
     @if (!loading() && !error()) {
-	<div class="grid">
-		
-        @for (p of produtos(); track p.id) {
-        <div class="card">
-			<img [src]="p.foto" [alt]="p.nome" />
-			<h3>{{ p.nome }}</h3>
-			<p class="marca">{{ p.marca }}</p>
-			<p class="desc">{{ p.descricao }}</p>
-			<p class="price">R$ {{ p.preco | number:'1.2-2' }}</p>
-			<a [routerLink]="['/produtos', p.id]" class="detalhe">Ver detalhes</a>
-        </div> 
-        }
-		
-	</div> 
+        <div class="grid">
+            @for (p of produtos(); track p.id) {
+                <div class="card">
+                    <img [src]="p.foto" [alt]="p.nome" />
+                    <div class="content">
+                        <h3>{{ p.nome }}</h3>
+                        <p class="marca">{{ p.marca }}</p>
+                        <p class="desc">{{ p.descricao }}</p>
+                        <div class="price-row">
+                            <p class="price">R$ {{ p.preco | number:'1.2-2' }}</p>
+                        </div>
+                        <a [routerLink]="['/produtos', p.id]" class="detalhe">Ver detalhes</a>
+                    </div>
+                </div>
+            }
+        </div>
     }
 </div>
