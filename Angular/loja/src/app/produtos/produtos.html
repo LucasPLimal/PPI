@@ -1,7 +1,6 @@
 <div class="produtos-root">
     <div class="topbar">
         <h2>Catálogo</h2>
-        <app-carrinho></app-carrinho>
     </div>
 
     @if (loading()) {
@@ -14,6 +13,11 @@
             <button (click)="loadProdutos()">Tentar novamente</button>
         </div>
     }
+
+	<button type="button" [routerLink]="['/carrinho']" class="carrinho-badge" (click)="toggleCarrinho()">
+    <span>Carrinho</span>
+    <strong>{{ quantidadeTotal() }}</strong>
+  </button>
 
     @if (!loading() && !error()) {
         <div class="grid">

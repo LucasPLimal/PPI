@@ -1,12 +1,12 @@
-import { Component, inject, OnInit, signal } from '@angular/core';
+import { Component, computed, inject, OnInit, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { LojaService } from '../loja-service';
 import { Produto } from '../produto';
-import { Carrinho } from '../carrinho/carrinho';
+import { CarrinhoService } from '../carrinho-service';
 
 @Component({
-	imports: [CommonModule, RouterModule, Carrinho],
+	imports: [CommonModule, RouterModule],
 	selector: 'app-produtos',
 	styleUrl: './produtos.css',
 	templateUrl: './produtos.html',
@@ -15,8 +15,15 @@ export class Produtos implements OnInit {
 	produtos = signal<Produto[]>([])
 	loading = signal<boolean>(true)
 	error = signal<string | null>(null)
-
+	readonly quantidadeTotal = computed(() => this.#carrinhoService.quantidadeTotal());
+  	readonly totalCompra = computed(() => this.#carrinhoService.total());
 	readonly #lojaService = inject(LojaService)
+	readonly #carrinhoService = inject(CarrinhoService)
+	readonly aberto = signal(false);
+
+	toggleCarrinho() {
+    this.aberto.update(v => !v);
+    }
 
 	ngOnInit(): void {
 		this.loadProdutos()
